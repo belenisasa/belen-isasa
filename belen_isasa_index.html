@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Belén Isasa — Data Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --cream:#f7f5f0; --paper:#fdfcf9; --ink:#111010; --ink2:#3d3c3a;
+  --muted:#8a8880; --rule:#e8e5df; --blue:#1a42cc; --blue-bg:#f0f3ff;
+  --green:#0d7a4e; --mono:'JetBrains Mono',monospace;
+}
+html { scroll-behavior:smooth; }
+body { font-family:'Inter',sans-serif; background:var(--paper); color:var(--ink); font-size:15px; line-height:1.6; -webkit-font-smoothing:antialiased; }
+body::before { content:''; position:fixed; inset:0; z-index:0; pointer-events:none; opacity:0.025;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size:200px; }
+nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; justify-content:space-between; align-items:center;
+  padding:0 clamp(2rem,6vw,5rem); height:56px; background:rgba(253,252,249,0.85);
+  backdrop-filter:blur(16px) saturate(180%); border-bottom:1px solid var(--rule); }
+.nav-logo { font-family:'Instrument Serif',serif; font-size:17px; color:var(--ink); letter-spacing:-0.3px; }
+.nav-logo span { font-style:italic; color:var(--blue); }
+.nav-links { display:flex; gap:2rem; list-style:none; }
+.nav-links a { font-size:11.5px; font-weight:500; letter-spacing:0.06em; text-transform:uppercase; color:var(--muted); text-decoration:none; transition:color 0.15s; }
+.nav-links a:hover { color:var(--ink); }
+.page { max-width:720px; margin:0 auto; padding:108px clamp(1.5rem,5vw,2rem) 6rem; position:relative; z-index:1; }
+.hero { padding-bottom:4rem; margin-bottom:4rem; border-bottom:1px solid var(--rule); }
+.status-line { display:flex; align-items:center; gap:8px; margin-bottom:2rem; }
+.status-dot { width:7px; height:7px; border-radius:50%; background:var(--green); box-shadow:0 0 0 3px rgba(13,122,78,0.15); animation:breathe 3s ease-in-out infinite; }
+@keyframes breathe { 0%,100%{box-shadow:0 0 0 3px rgba(13,122,78,0.15)} 50%{box-shadow:0 0 0 6px rgba(13,122,78,0.08)} }
+.status-text { font-size:11.5px; font-weight:500; letter-spacing:0.08em; text-transform:uppercase; color:var(--green); }
+h1 { font-family:'Instrument Serif',serif; font-size:clamp(44px,8vw,68px); line-height:0.98; letter-spacing:-2px; color:var(--ink); margin-bottom:1.4rem; font-weight:400; }
+h1 em { font-style:italic; color:var(--blue); }
+.hero-role { font-size:13px; font-weight:400; letter-spacing:0.04em; color:var(--muted); margin-bottom:1.6rem; text-transform:uppercase; }
+.hero-bio { font-size:17px; font-weight:300; line-height:1.75; color:var(--ink2); max-width:560px; margin-bottom:2.4rem; }
+.hero-bio strong { font-weight:500; color:var(--ink); }
+.contact-row { display:flex; flex-wrap:wrap; gap:8px; }
+.chip { display:inline-flex; align-items:center; gap:6px; font-size:12px; font-weight:400; color:var(--ink2); background:var(--cream); border:1px solid var(--rule); border-radius:100px; padding:6px 14px; text-decoration:none; transition:all 0.15s; white-space:nowrap; }
+.chip svg { width:12px; height:12px; opacity:0.6; flex-shrink:0; }
+.chip:hover { background:var(--blue-bg); border-color:#c7d2ff; color:var(--blue); }
+.chip:hover svg { opacity:1; }
+.section { margin-bottom:4rem; }
+.section-head { display:flex; align-items:baseline; gap:1rem; margin-bottom:2rem; }
+.section-label { font-family:'Instrument Serif',serif; font-size:26px; color:var(--ink); font-weight:400; letter-spacing:-0.5px; }
+.section-num { font-family:var(--mono); font-size:11px; color:var(--muted); letter-spacing:0.05em; }
+.exp-list { display:flex; flex-direction:column; }
+.exp-item { display:grid; grid-template-columns:110px 1fr; gap:0 2.5rem; padding:1.8rem 0; border-top:1px solid var(--rule); }
+.exp-item:last-child { border-bottom:1px solid var(--rule); }
+.exp-meta { padding-top:3px; }
+.exp-period { font-family:var(--mono); font-size:10.5px; color:var(--muted); line-height:1.5; letter-spacing:0.02em; }
+.exp-current { display:inline-block; margin-top:6px; font-size:9.5px; font-weight:500; letter-spacing:0.08em; text-transform:uppercase; color:var(--green); background:rgba(13,122,78,0.08); border-radius:4px; padding:2px 7px; }
+.exp-title { font-size:16px; font-weight:500; color:var(--ink); line-height:1.3; margin-bottom:3px; }
+.exp-company { font-size:13px; color:var(--blue); font-weight:400; margin-bottom:10px; }
+.exp-bullets { list-style:none; display:flex; flex-direction:column; gap:6px; }
+.exp-bullets li { font-size:14px; color:var(--ink2); line-height:1.65; padding-left:16px; position:relative; }
+.exp-bullets li::before { content:'→'; position:absolute; left:0; color:var(--blue); font-size:12px; top:1px; }
+.skills-block { display:flex; flex-direction:column; }
+.skill-row { display:grid; grid-template-columns:130px 1fr; gap:2rem; align-items:start; padding:1rem 0; border-top:1px solid var(--rule); }
+.skill-row:last-child { border-bottom:1px solid var(--rule); }
+.skill-cat { font-family:var(--mono); font-size:10.5px; color:var(--muted); letter-spacing:0.04em; padding-top:3px; text-transform:uppercase; }
+.skill-pills { display:flex; flex-wrap:wrap; gap:6px; }
+.pill { font-size:12px; padding:4px 11px; border-radius:6px; background:var(--cream); color:var(--ink2); border:1px solid var(--rule); }
+.pill.core { background:var(--blue-bg); color:var(--blue); border-color:#c7d2ff; font-weight:500; }
+.cert-list { display:flex; flex-direction:column; }
+.cert-item { padding:1.4rem 0; border-top:1px solid var(--rule); }
+.cert-item:last-child { border-bottom:1px solid var(--rule); }
+.cert-row { display:flex; justify-content:space-between; align-items:flex-start; gap:1rem; margin-bottom:4px; }
+.cert-name { font-size:15px; font-weight:500; color:var(--ink); }
+.cert-year { font-family:var(--mono); font-size:10.5px; color:var(--muted); white-space:nowrap; padding-top:2px; }
+.cert-desc { font-size:13px; color:var(--muted); line-height:1.55; }
+.cert-link { color:var(--blue); text-decoration:none; }
+.cert-link:hover { text-decoration:underline; }
+.edu-list { display:flex; flex-direction:column; }
+.edu-item { display:grid; grid-template-columns:110px 1fr; gap:0 2.5rem; padding:1.4rem 0; border-top:1px solid var(--rule); }
+.edu-item:last-child { border-bottom:1px solid var(--rule); }
+.edu-year { font-family:var(--mono); font-size:10.5px; color:var(--muted); padding-top:3px; line-height:1.5; }
+.edu-deg { font-size:15px; font-weight:500; color:var(--ink); margin-bottom:3px; }
+.edu-meta { font-size:13px; color:var(--muted); }
+.lang-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; }
+.lang-card { padding:1.4rem 1.2rem; background:var(--cream); border-radius:10px; }
+.lang-name { font-size:15px; font-weight:500; margin-bottom:3px; }
+.lang-level { font-size:12px; color:var(--muted); margin-bottom:10px; }
+.lang-bar { height:3px; background:var(--rule); border-radius:2px; overflow:hidden; }
+.lang-fill { height:100%; background:var(--blue); border-radius:2px; }
+footer { border-top:1px solid var(--rule); padding:2rem clamp(1.5rem,5vw,2rem); display:flex; justify-content:space-between; align-items:center; max-width:720px; margin:0 auto; font-size:11.5px; color:var(--muted); position:relative; z-index:1; }
+.footer-name { font-family:'Instrument Serif',serif; font-size:13px; color:var(--ink2); font-style:italic; }
+.reveal { opacity:0; transform:translateY(18px); transition:opacity 0.5s ease,transform 0.5s ease; }
+.reveal.visible { opacity:1; transform:none; }
+@media(max-width:640px){
+  h1{letter-spacing:-1px}
+  .exp-item,.edu-item{grid-template-columns:1fr;gap:4px}
+  .exp-meta{display:flex;gap:10px;align-items:center}
+  .skill-row{grid-template-columns:1fr;gap:6px}
+  .lang-grid{grid-template-columns:1fr;gap:8px}
+  nav .nav-links{display:none}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Belén <span>Isasa</span></div>
+  <ul class="nav-links">
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="page">
+
+  <div class="hero">
+    <div class="status-line">
+      <div class="status-dot"></div>
+      <span class="status-text">Open to remote roles — U.S. &amp; global</span>
+    </div>
+    <h1>Belén<br><em>Isasa</em></h1>
+    <p class="hero-role">Data Engineer &nbsp;/&nbsp; Analytics &nbsp;·&nbsp; Montevideo, Uruguay</p>
+    <p class="hero-bio">
+      I build <strong>data pipelines that run in production</strong> — migrating legacy SQL workloads to
+      cloud-native architectures, designing Lakehouse solutions in Databricks, and delivering analytics
+      at scale. <strong>Databricks Certified</strong> Data Engineer Professional. Currently consulting
+      remotely across multiple client engagements; comfortable async across time zones.
+    </p>
+    <div class="contact-row" id="contact">
+      <a class="chip" href="mailto:belenisasa00@gmail.com">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg>
+        belenisasa00@gmail.com
+      </a>
+      <a class="chip" href="https://www.linkedin.com/in/belen-isasa/" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+        linkedin.com/in/belen-isasa
+      </a>
+      <span class="chip">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.14 13.8a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.05 3h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.09 10.9a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 21 17z"/></svg>
+        +598 96421390
+      </span>
+    </div>
+  </div>
+
+  <div class="section reveal" id="experience">
+    <div class="section-head">
+      <span class="section-label">Experience</span>
+      <span class="section-num">01</span>
+    </div>
+    <div class="exp-list">
+
+      <div class="exp-item">
+        <div class="exp-meta">
+          <div class="exp-period">2024<br>Present</div>
+          <div class="exp-current">Current</div>
+        </div>
+        <div class="exp-body">
+          <div class="exp-title">Data Engineer</div>
+          <div class="exp-company">Sunny Data — Data Engineering Consultancy · Remote</div>
+          <ul class="exp-bullets">
+            <li>Architected end-to-end Databricks pipelines (Bronze → Silver → Gold) for retail clients, replacing manual Excel + SQL Server workflows and cutting weekly processing time by ~70%.</li>
+            <li>Migrated 15+ legacy SQL Server stored procedures to PySpark, improving scalability on multi-million-row datasets.</li>
+            <li>Designed row- and column-level security in Unity Catalog; identified Materialized View limitations with dynamic group filters and implemented standard Views as the correct pattern.</li>
+            <li>Delivered modular, parametrized pipeline architecture supporting 6+ retail chains from a single codebase.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-meta">
+          <div class="exp-period">Feb 2024<br>Present</div>
+          <div class="exp-current">Current</div>
+        </div>
+        <div class="exp-body">
+          <div class="exp-title">Fraud Prevention Data Analyst</div>
+          <div class="exp-company">Mercado Libre · Remote</div>
+          <ul class="exp-bullets">
+            <li>Analyze large-scale transaction data to detect fraud patterns across millions of daily events at Latin America's leading e-commerce platform.</li>
+            <li>Build and maintain dashboards and alerting models that surface anomalies to operations teams in real time.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-meta">
+          <div class="exp-period">Aug 2022<br>Feb 2024</div>
+        </div>
+        <div class="exp-body">
+          <div class="exp-title">Lead Data Analyst</div>
+          <div class="exp-company">369 Crafting AdTech · Montevideo</div>
+          <ul class="exp-bullets">
+            <li>Led analytics for an adtech platform, owning the full pipeline from raw ad event data to client-facing dashboards in Looker Studio and Tableau.</li>
+            <li>Built ETL processes on GCP/BigQuery consolidating data from 5+ advertising sources.</li>
+            <li>Mentored junior analysts and defined team data standards and documentation practices.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-meta">
+          <div class="exp-period">Mar–Jun<br>2023</div>
+        </div>
+        <div class="exp-body">
+          <div class="exp-title">Analytical Programming Lecturer</div>
+          <div class="exp-company">Universidad de Montevideo</div>
+          <ul class="exp-bullets">
+            <li>Taught data-oriented programming to undergraduates; designed curriculum covering Python, pandas, and SQL fundamentals.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-meta">
+          <div class="exp-period">Aug–Dec<br>2022</div>
+        </div>
+        <div class="exp-body">
+          <div class="exp-title">Data Analyst Intern</div>
+          <div class="exp-company">Montevideo Labs</div>
+          <ul class="exp-bullets">
+            <li>Exploratory data analysis and data science project support on client datasets.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-meta">
+          <div class="exp-period">Sep 2021<br>Jun 2022</div>
+        </div>
+        <div class="exp-body">
+          <div class="exp-title">Jr. Researcher &amp; Data Intern</div>
+          <div class="exp-company">CINOI de Montevideo · Inter-American Development Bank (IDB)</div>
+          <ul class="exp-bullets">
+            <li>Research and data support roles; policy-level analysis and international development reporting across two institutions.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="section reveal" id="skills">
+    <div class="section-head">
+      <span class="section-label">Skills</span>
+      <span class="section-num">02</span>
+    </div>
+    <div class="skills-block">
+      <div class="skill-row">
+        <span class="skill-cat">Engineering</span>
+        <div class="skill-pills">
+          <span class="pill core">Databricks</span>
+          <span class="pill core">Apache Spark</span>
+          <span class="pill core">PySpark</span>
+          <span class="pill core">Delta Lake</span>
+          <span class="pill core">Unity Catalog</span>
+          <span class="pill">ETL / ELT</span>
+          <span class="pill">Medallion Architecture</span>
+        </div>
+      </div>
+      <div class="skill-row">
+        <span class="skill-cat">Cloud</span>
+        <div class="skill-pills">
+          <span class="pill">GCP · BigQuery</span>
+          <span class="pill">AWS · S3</span>
+          <span class="pill">Databricks Lakehouse</span>
+        </div>
+      </div>
+      <div class="skill-row">
+        <span class="skill-cat">Languages</span>
+        <div class="skill-pills">
+          <span class="pill core">Python</span>
+          <span class="pill core">SQL</span>
+          <span class="pill">T-SQL</span>
+          <span class="pill">Spark SQL</span>
+        </div>
+      </div>
+      <div class="skill-row">
+        <span class="skill-cat">BI</span>
+        <div class="skill-pills">
+          <span class="pill">Looker Studio</span>
+          <span class="pill">Tableau</span>
+          <span class="pill">Advanced Excel</span>
+        </div>
+      </div>
+      <div class="skill-row">
+        <span class="skill-cat">Practices</span>
+        <div class="skill-pills">
+          <span class="pill">Git</span>
+          <span class="pill">Modular pipeline design</span>
+          <span class="pill">Data quality controls</span>
+          <span class="pill">Async / remote-first</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section reveal">
+    <div class="section-head">
+      <span class="section-label">Certifications</span>
+      <span class="section-num">03</span>
+    </div>
+    <div class="cert-list">
+      <div class="cert-item">
+        <div class="cert-row">
+          <div class="cert-name">Databricks Certified Data Engineer Professional</div>
+          <div class="cert-year">2024</div>
+        </div>
+        <div class="cert-desc">Advanced certification covering Delta Lake, pipeline orchestration, performance tuning, and Unity Catalog security on the Databricks Lakehouse Platform.</div>
+      </div>
+      <div class="cert-item">
+        <div class="cert-row">
+          <div class="cert-name">AI Fundamentals for Developers — Anthropic</div>
+          <div class="cert-year">2024</div>
+        </div>
+        <div class="cert-desc">Prompt engineering, AI system design, and responsible deployment of large language models. <a class="cert-link" href="https://anthropic.skilljar.com" target="_blank" rel="noopener">anthropic.skilljar.com</a></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section reveal" id="education">
+    <div class="section-head">
+      <span class="section-label">Education</span>
+      <span class="section-num">04</span>
+    </div>
+    <div class="edu-list">
+      <div class="edu-item">
+        <div class="edu-year">2019–2022</div>
+        <div>
+          <div class="edu-deg">B.Sc. Data Science for Business</div>
+          <div class="edu-meta">Universidad de Montevideo · Graduated Dec 2022</div>
+        </div>
+      </div>
+      <div class="edu-item">
+        <div class="edu-year">2022–2023</div>
+        <div>
+          <div class="edu-deg">Postgraduate — Big Data Applied to Football Scouting</div>
+          <div class="edu-meta">Specialized MSc program · Applied ML and data pipeline techniques to sports analytics</div>
+        </div>
+      </div>
+      <div class="edu-item">
+        <div class="edu-year">2019–2022</div>
+        <div>
+          <div class="edu-deg">Diploma in Marketing</div>
+          <div class="edu-meta">Universidad de Montevideo</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section reveal">
+    <div class="section-head">
+      <span class="section-label">Languages</span>
+      <span class="section-num">05</span>
+    </div>
+    <div class="lang-grid">
+      <div class="lang-card">
+        <div class="lang-name">Spanish</div>
+        <div class="lang-level">Native</div>
+        <div class="lang-bar"><div class="lang-fill" style="width:100%"></div></div>
+      </div>
+      <div class="lang-card">
+        <div class="lang-name">English</div>
+        <div class="lang-level">Advanced · Professional</div>
+        <div class="lang-bar"><div class="lang-fill" style="width:80%"></div></div>
+      </div>
+      <div class="lang-card">
+        <div class="lang-name">Portuguese</div>
+        <div class="lang-level">Intermediate</div>
+        <div class="lang-bar"><div class="lang-fill" style="width:55%"></div></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <span class="footer-name">Belén Isasa</span>
+  <span>Montevideo, Uruguay · Open to U.S. remote roles</span>
+</footer>
+
+<script>
+const obs = new IntersectionObserver(
+  es => es.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); }),
+  { threshold: 0.08 }
+);
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
